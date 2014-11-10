@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+
+      <%= form_for @user, url: '/user/change_email', method: :post, html: { id: 'change-email-form', class: 'form-horizontal form-custom' } do |f| %>
+
+        <div class="row" style="border-bottom: 1px solid #e5e5e5; margin-bottom: 20px;">
+          <div class="col-md-12">
+            <h3>Change Email</h3>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="password" class="col-md-4 control-label">Current Password</label>
+          <div class="col-md-8">
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password" />
+          </div>
+        </div>
+          
+        <div class="form-group row">
+          <label for="new-email" class="col-md-4 control-label">New Email</label>
+          <div class="col-md-8">
+            <input type="text" class="form-control" id="new-email" name="new_email" placeholder="Email Address" required />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="email-confirm" class="col-md-4 control-label">Confirm Email</label>
+          <div class="col-md-8">
+            <input type="text" class="form-control" id="email-confirm" name="email_confirm" placeholder="Re-enter Email" required />
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-md-12">
+            <a class="btn btn-lg btn-default pull-right" href="/">Close</a>
+            <input class="btn btn-lg btn-primary pull-right" style="margin-right: 10px;" type="submit" name="update" value="Update" />
+          </div>
+        </div>
+
+      <% end %>
+    </div>
+  </div>
+</div><!-- container -->
+<div style="clear: both;"></div>
+
+<script type="text/javascript">
+  $("#change-email-form").validate({
+    rules: {
+      password: {
+        required: true
+      },
+      new_email: {
+        required: true,
+        email: true
+      },
+      email_confirm: {
+        equalTo: "#new-email"
+      }
+    },
+    messages: {
+      email_confirm: {
+        equalTo: "Both email addresses must be the same"
+      }
+    }
+  });
+  $("#password").focus();
+</script>

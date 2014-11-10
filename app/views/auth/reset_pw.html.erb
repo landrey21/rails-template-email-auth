@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+
+      <%= form_for @user, url: '/auth/reset_pw', method: :post, html: { id: 'auth-reset-pw-form', class: "form form-custom" } do |f| %>
+        <div class="row">
+          <div class="col-md-12">
+            <h2>Password Reset</h2>
+            <p>It's simple. Just enter your email then follow the instructions.</p>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-md-12">
+            <label class="sr-only" for="email">Email</label>
+            <input type="text" class="form-control" name="email" id="email" placeholder="Email" required value="" tabindex="1" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-md-12">
+            <input class="btn btn-lg btn-primary pull-right" type="submit" name="submit" value="Reset"/>
+          </div>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>
+<div style="clear: both;"></div>
+
+<script type="text/javascript">
+  $("#auth-reset-pw-form").validate({
+    rules: {
+      email: {
+        required: true,
+        email: true
+      }
+    }
+  });
+  $("#email").focus();
+</script>
+

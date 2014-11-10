@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="center jumbotron">
+
+    <% if flash[:alert] %>
+      <h3>Please verify the link in your email.</h3>
+    <% else %>
+      <h1>Welcome <%= @user.name -%></h1>
+      <h3>Thank you for confirming your e-mail address.  You are now free to experience all the joys of using TemplateApp.</h3>
+      <div style="margin-top: 30px;">
+        <a href="/auth/signin">Continue ...</a>
+      </div>
+    <% end %>
+
+  </div>
+</div>
+

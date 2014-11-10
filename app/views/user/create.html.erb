@@ -1,0 +1,72 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+
+      <%= form_for @user, url: '/user/create', method: :post, html: { id: 'user-create-form', class: "form form-custom" } do |f| %>
+
+        <div class="row">
+          <div class="col-md-12">
+            <h3>Get started - it's free.</h3>
+            <p>Registration only takes a minute.</p>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="sr-only" for="name">Name</label>
+          <div class="col-md-12">
+            <input type="text" class="form-control" id="name" name="name" placeholder="Name" required value=""/>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="sr-only" for="email">Email Address</label>
+          <div class="col-md-12">
+            <input type="text" class="form-control" id="email" name="email" placeholder="Email" required value=""/>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="sr-only" for="email-confirm">Confirm Email</label>
+          <div class="col-md-12">
+            <input type="text" class="form-control" id="email-confirm" name="email_confirm" placeholder="Re-enter Email" required value=""/>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="sr-only" for="password">Password</label>
+          <div class="col-md-12">
+            <input type="password" class="form-control" id="password" name="password" placeholder="New Password" required/>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-md-12">
+            <input class="btn btn-lg btn-primary btn-block" type="submit" name="create" value="Create Account"/>
+            <p class="helper-link">By signing up, you indicate that you have read and agree to the <a href="/site/tos/">Terms of Service</a>.</p>
+          </div>
+        </div>
+
+      <% end %>
+    </div>
+  </div>
+</div><!-- container -->
+<div style="clear: both;"></div>
+
+<script type="text/javascript">
+  $("#user-create-form").validate({
+    rules: {
+      name: {
+        required: true
+      },
+      email: {
+        required: true,
+        email: true
+      },
+      email_confirm: {
+        equalTo: "#email"
+      },
+      password: {
+        required: true,
+        minlength: 6,
+        maxlength: 20
+      },
+    }
+  });
+  $("#name").focus();
+</script>
+
