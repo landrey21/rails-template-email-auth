@@ -4,8 +4,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   protected
+
   def authenticated?
     unless session[:user_id]
+      flash[:alert] = 'Your session has expired.  Please Sign In to continue.'
       redirect_to(:controller => 'auth', :action => 'signin')
       return false
     else

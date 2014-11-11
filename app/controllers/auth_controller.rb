@@ -10,11 +10,10 @@ class AuthController < ApplicationController
 
   #--------------------------------------------------------
   def signin_post
-    @message = ''
+
     reset_session
     email = params[:email].downcase
     @user = User.find_by email: email
-    #puts user.inspect
     if @user == nil
       @user = User.new
       flash.now[:alert] = 'Incorrect email or password.'
@@ -57,6 +56,7 @@ class AuthController < ApplicationController
 
   #--------------------------------------------------------
   def reset_pw_post
+
     email = params[:email].downcase
     @user = User.find_by email: email
     if @user == nil

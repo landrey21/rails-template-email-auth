@@ -1,5 +1,7 @@
 class UserController < ApplicationController
 
+  before_action :authenticated?, :except => [:create, :post, :confirm_email]
+
   #---------------------------------------------------------
   def create 
     @user = User.new()
@@ -16,7 +18,6 @@ class UserController < ApplicationController
       unless existing_user.nil?
         flash.now[:alert] = 'Email already in use.'
       else
-        #@user = User.new(params[:user].permit(:email, :name))
         @user.name = params[:name]
         @user.email = email
         @user.encrypt_password(params[:password])
@@ -37,13 +38,12 @@ class UserController < ApplicationController
 
   #---------------------------------------------------------
   def edit
-    authenticated?
     @user = User.find_by id: session[:user_id]
   end
 
   #---------------------------------------------------------
   def put
-    authenticated?
+
     @user = User.find_by id: session[:user_id]
     @user.name = params[:name]
     if @user.save
@@ -58,14 +58,12 @@ class UserController < ApplicationController
 
   #---------------------------------------------------------
   def change_pw
-    authenticated?
     @user = User.find_by id: session[:user_id]
   end
 
   #---------------------------------------------------------
   def change_pw_post
 
-    authenticated?
     @user = User.find_by id: session[:user_id]
     if (defined?(params[:new_password])) && @user.authenticate(params[:password])
       @user.encrypt_password(params[:new_password])
@@ -83,13 +81,12 @@ class UserController < ApplicationController
 
   #---------------------------------------------------------
   def change_email
-    authenticated?
     @user = User.find_by id: session[:user_id]
   end
 
   #---------------------------------------------------------
   def change_email_post
-    authenticated?
+
     @user = User.find_by id: session[:user_id]
     if (defined?(params[:new_email])) && @user.authenticate(params[:password])
       new_email = params[:new_email].downcase
@@ -115,10 +112,10 @@ class UserController < ApplicationController
 
   #---------------------------------------------------------
   def confirm_email
+
     if (defined?(params[:confirmation]))
       @user = User.find_by email_confirmation: params[:confirmation]
       if @user.nil?
-        #@message = 'Confirmation code not found.'
         flash.now[:alert] = 'Confirmation code not found.'
       else
         @user.email_confirmation = 1
