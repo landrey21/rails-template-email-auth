@@ -23,7 +23,8 @@ class UserController < ApplicationController
         @user.encrypt_password(params[:password])
         @user.email_confirmation_hash(email)
         if @user.save
-          # TODO send welcome email
+          # send welcome email
+          UserMailer.welcome(@user, request).deliver
           render 'created', layout: 'site'
           return
         else

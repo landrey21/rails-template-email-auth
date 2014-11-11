@@ -68,8 +68,9 @@ class AuthController < ApplicationController
       @user.encrypt_password(password_str)
       @user.failed_logins = 0
       if @user.save
-        flash.now[:notice] = 'Your password has been reset to ' + password_str + '.'
-        # TODO send email with new password
+        flash.now[:notice] = 'Your password has been reset.  Please check your email.'
+        # send email with new password
+        UserMailer.reset_pw(@user, password_str, request).deliver
       else
         flash.now[:alert] = @user.errors.full_messages.join('; ')
       end

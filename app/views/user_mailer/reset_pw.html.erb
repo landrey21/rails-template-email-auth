@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hi <%= @user.name -%>,</h1>
+    <p>
+      Your password has been reset to <%= @password -%>.  Please use
+      this one to sign in, then change it.
+    </p>
+    <p>Sign in to the site here: <%= @url -%></p>
+    <p>Thanks and have a great day!</p>
+  </body>
+</html>
