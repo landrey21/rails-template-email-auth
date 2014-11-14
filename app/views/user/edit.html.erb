@@ -12,13 +12,13 @@
  
         <div class="form-group row">
           <label for="email" class="col-md-3 control-label">Email</label>
-          <div class="col-md-6">
+          <div class="col-md-9">
 	  <p class="form-control-static"><%= @user.email %> (<%= link_to 'Change Email', '/user/change_email/' %>)</p>
           </div>
         </div>
         <div class="form-group row">
           <label for="name" class="col-md-3 control-label" for="name">Name</label>
-          <div class="col-md-6">
+          <div class="col-md-8">
             <input type="text" class="form-control" id="name" name="name" placeholder="Name" required value="<%= @user.name %>"/>
           </div>
         </div>
